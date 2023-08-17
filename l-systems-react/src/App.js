@@ -24,7 +24,8 @@ function App() {
 }
 
 const StyledNav = styled.ul`
-  border: 5px solid red;
+  border: 1px solid black;
+  padding: 18px;
 `;
 
 export default App;

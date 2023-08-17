@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react';
+import styled, { css } from 'styled-components';
+
+import { CenteredCol, CenteredRow, FlexRow } from '../components/layout';
 
 const _PRESETS = [
   {
@@ -169,10 +172,10 @@ export function Simple() {
   }, []);
 
   return (
-    <div className="row center">
-      <div className="column center bordered">
-        <div className="row">
-          <p className="col1">Presets</p>
+    <CenteredRow>
+      <MenuContainer>
+        <FlexRow>
+          <MenuHeadingP>Presets</MenuHeadingP>
           <input
             id="presets"
             className="mdl-slider mdl-js-slider"
@@ -182,9 +185,9 @@ export function Simple() {
             value={getSystemStateByKey('presets')}
             onChange={(e) => setSystemStateByKey('presets', e.target.value)}
           ></input>
-        </div>
-        <div className="row">
-          <p className="col1">Iterations</p>
+        </FlexRow>
+        <FlexRow>
+          <MenuHeadingP>Iterations</MenuHeadingP>
           <input
             id="iterations"
             className="mdl-slider mdl-js-slider"
@@ -194,20 +197,19 @@ export function Simple() {
             value={getSystemStateByKey('iterations')}
             onChange={(e) => setSystemStateByKey('iterations', e.target.value)}
           ></input>
-        </div>
-        <div className="row">
-          <h1 className="col1">Leaves</h1>
-          <input
+        </FlexRow>
+        <FlexRow>
+          <MenuHeadingH1>Leaves</MenuHeadingH1>
+          <ColorInput
             id="leaf.color"
-            className="color"
             type="color"
             name="body"
             value={getSystemStateByKey('color')}
             onChange={(e) => setSystemStateByKey('color', e.target.value)}
-          ></input>
-        </div>
-        <div className="row">
-          <p className="col1">Length</p>
+          />
+        </FlexRow>
+        <FlexRow>
+          <MenuHeadingP>Length</MenuHeadingP>
           <input
             id="leaf.length"
             className="mdl-slider mdl-js-slider"
@@ -216,10 +218,10 @@ export function Simple() {
             max="20.0"
             value={getSystemStateByKey('length')}
             onChange={(e) => setSystemStateByKey('length', e.target.value)}
-          ></input>
-        </div>
-        <div className="row">
-          <p className="col1">Width</p>
+          />
+        </FlexRow>
+        <FlexRow>
+          <MenuHeadingP>Width</MenuHeadingP>
           <input
             id="leaf.width"
             className="mdl-slider mdl-js-slider"
@@ -229,20 +231,19 @@ export function Simple() {
             value={getSystemStateByKey('width')}
             onChange={(e) => setSystemStateByKey('width', e.target.value)}
           ></input>
-        </div>
-        <div className="row">
-          <h1 className="col1">Branches</h1>
-          <input
+        </FlexRow>
+        <FlexRow>
+          <MenuHeadingH1>Branches</MenuHeadingH1>
+          <ColorInput
             id="branch.color"
-            className="color"
             type="color"
             name="body"
             value={getSystemStateByKey('branchColor')}
             onChange={(e) => setSystemStateByKey('branchColor', e.target.value)}
-          ></input>
-        </div>
-        <div className="row">
-          <p className="col1">Alpha</p>
+          />
+        </FlexRow>
+        <FlexRow>
+          <MenuHeadingP>Alpha</MenuHeadingP>
           <input
             id="leaf.alpha"
             className="mdl-slider mdl-js-slider"
@@ -253,9 +254,9 @@ export function Simple() {
             value={getSystemStateByKey('alpha')}
             onChange={(e) => setSystemStateByKey('alpha', e.target.value)}
           ></input>
-        </div>
-        <div className="row">
-          <p className="col1">Length</p>
+        </FlexRow>
+        <FlexRow>
+          <MenuHeadingP>Length</MenuHeadingP>
           <input
             id="branch.length"
             className="mdl-slider mdl-js-slider"
@@ -267,9 +268,9 @@ export function Simple() {
               setSystemStateByKey('branchLength', e.target.value)
             }
           ></input>
-        </div>
-        <div className="row">
-          <p className="col1">Width</p>
+        </FlexRow>
+        <FlexRow>
+          <MenuHeadingP>Width</MenuHeadingP>
           <input
             id="branch.width"
             className="mdl-slider mdl-js-slider"
@@ -280,9 +281,9 @@ export function Simple() {
             value={getSystemStateByKey('branchWidth')}
             onChange={(e) => setSystemStateByKey('branchWidth', e.target.value)}
           ></input>
-        </div>
-        <div className="row">
-          <p className="col1">Angle</p>
+        </FlexRow>
+        <FlexRow>
+          <MenuHeadingP>Angle</MenuHeadingP>
           <input
             id="branch.angle"
             className="mdl-slider mdl-js-slider"
@@ -293,9 +294,9 @@ export function Simple() {
             value={getSystemStateByKey('angle')}
             onChange={(e) => setSystemStateByKey('angle', e.target.value)}
           ></input>
-        </div>
-        <div className="row">
-          <p className="col1">Falloff</p>
+        </FlexRow>
+        <FlexRow>
+          <MenuHeadingP>Falloff</MenuHeadingP>
           <input
             id="branch.lengthFalloff"
             className="mdl-slider mdl-js-slider"
@@ -306,9 +307,36 @@ export function Simple() {
             value={getSystemStateByKey('falloff')}
             onChange={(e) => setSystemStateByKey('falloff', e.target.value)}
           ></input>
-        </div>
-      </div>
-      <canvas id="canvas" width="1000px" height="1000px"></canvas>
-    </div>
+        </FlexRow>
+      </MenuContainer>
+      <canvas width="600px" height="800px" id="canvas" />
+    </CenteredRow>
   );
 }
+
+// TODO: as we build out other examples than the 'simple' example, we likely want to move this
+// (and perhaps the input form in general) into its own component
+const MenuContainer = styled(CenteredCol)`
+  background-color: white;
+  border-radius: 0% 0% 0% 0% / 0% 0% 0% 0%;
+  box-shadow: 5px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+`;
+
+const menuHeadingStyles = css`
+  margin: 0;
+  width: 125px;
+  max-width: 125px;
+  text-align: right;
+`;
+const MenuHeadingP = styled.p`
+  ${menuHeadingStyles}
+  font-size: 1em;
+`;
+const MenuHeadingH1 = styled.h1`
+  ${menuHeadingStyles}
+  font-size: 2em;
+`;
+const ColorInput = styled.input`
+  margin: 0 20px;
+`;
